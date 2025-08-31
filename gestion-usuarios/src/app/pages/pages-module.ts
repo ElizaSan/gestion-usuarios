@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ApplicationConfig, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Perfil } from './perfil/perfil';
 import { Home } from './home/home';
@@ -6,6 +6,7 @@ import { Documentacion } from './documentacion/documentacion';
 import { Estructuras } from './estructuras/estructuras';
 import { Usuarios } from './usuarios/usuarios';
 import { RouterModule, Routes } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 const routes: Routes = [
     {
@@ -31,12 +32,22 @@ const routes: Routes = [
 
 ]
 
+const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(),
+  ]
+}
+
+
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     Home,Documentacion,Estructuras,Usuarios,Perfil,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+
+
   ]
 })
 export class PagesModule { }

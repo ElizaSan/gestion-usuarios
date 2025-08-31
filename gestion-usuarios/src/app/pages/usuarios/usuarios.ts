@@ -1,11 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from '../../services/usuarios-service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-usuarios',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './usuarios.html',
-  styleUrl: './usuarios.css'
+  styleUrl: './usuarios.css',
+  standalone: true,
 })
-export class Usuarios {
+
+export class Usuarios implements OnInit {
+
+  usuarios: any[] = [];
+  cargando: boolean = true;
+
+  constructor(private usuariosService: UsuariosService) { }
+
+  ngOnInit(): void {
+    this.usuariosService.getUsuarios().subscribe({
+      next: (data) => {
+        this.usuarios = data;
+        this.cargando = false;
+      },
+      error: (err) => {
+        console.error('Error al obtener usuarios', err);
+        this.cargando = false;
+      },
+    });
+  }
 
 }
