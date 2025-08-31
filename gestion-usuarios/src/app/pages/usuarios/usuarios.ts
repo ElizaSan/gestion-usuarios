@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 
 export class Usuarios implements OnInit {
 
-  usuarios: any[] = [];
+  usuarios: Usuarios[] = [];
   cargando: boolean = true;
 
   constructor(private usuariosService: UsuariosService) { }
